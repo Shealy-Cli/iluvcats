@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Random Cats - Cute Random Cat Pictures & Images</title>
+
+<a href="https://iluvcat.pics">Visit my cat site!</a>
+    
+<meta name="description"
+content="Discover a new random cat picture every time! Browse cute cats, funny cats, adorable kittens, and random cat images with one click.">
+
+<meta name="keywords"
+content="random cats, random cat, random cat pictures, random cat images, cat pictures, cat images, cute cats, cute cat pictures, funny cats, funny cat pictures, adorable cats, kitten pictures, cat photos, cats">
+
+<meta name="author" content="Texifire">
+
+<meta name="robots" content="index, follow">
+
+<meta name="googlebot" content="index, follow">
+
+<link rel="canonical" href="https://YOUR-DOMAIN.com/">
+
+<meta property="og:type" content="website">
+
+<meta property="og:title"
+content="Random Cats - Cute Random Cat Pictures & Images">
+
+<meta property="og:description"
+content="Get a completely random cat picture with the click of a button. Discover cute, funny, and adorable cats!">
+
+<meta property="og:url"
+content="https://YOUR-DOMAIN.com/">
+
+<meta property="og:site_name"
+content="Random Cats">
+
+<meta property="og:image"
+content="https://YOUR-DOMAIN.com/cat-preview.jpg">
+
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="twitter:title"
+content="Random Cats - Random Cat Pictures">
+
+<meta name="twitter:description"
+content="Find a new random cat picture every time. Cute cats, funny cats, adorable kittens, and more!">
+
+<meta name="twitter:image"
+content="https://YOUR-DOMAIN.com/cat-preview.jpg">
+
+<meta name="theme-color" content="#111318">
+    
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "WebSite",
+"name": "Random Cats",
+"url": "https://ilovecat.pics/",
+"description": "A website that displays random cat pictures, cute cats, funny cats, and adorable kittens.",
+"keywords": [
+"random cats",
+"random cat pictures",
+"random cat images",
+"cute cats",
+"cute cat pictures",
+"funny cats",
+"cat pictures",
+"cat images",
+"kitten pictures"
+]
+}
+</script>
+
+<style>
+* {
+box-sizing: border-box;
+}
+
+body {
+margin: 0;
+min-height: 100vh;
+
+background: #000000;
+color: white;
+
+font-family: Arial, Helvetica, sans-serif;
+
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+
+padding: 30px;
+}
+
+h1 {
+margin: 0 0 25px 0;
+font-size: 42px;
+letter-spacing: 2px;
+}
+
+.cat-container {
+width: min(900px, 90vw);
+height: min(650px, 70vh);
+
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+#cat-image {
+max-width: 100%;
+max-height: 100%;
+
+width: auto;
+height: auto;
+
+object-fit: contain;
+
+transition: opacity 0.3s ease;
+}
+
+#new-cat {
+margin-top: 30px;
+
+padding: 16px 40px;
+
+border: none;
+border-radius: 50px;
+
+background: #ff0000;
+color: white;
+
+font-size: 20px;
+font-weight: bold;
+
+cursor: pointer;
+
+transition:
+transform 0.15s ease,
+background 0.15s ease;
+}
+
+#new-cat:hover {
+background: #ff3333;
+transform: scale(1.05);
+}
+
+#new-cat:active {
+transform: scale(0.95);
+}
+
+#loading {
+position: absolute;
+font-size: 18px;
+color: #aaa;
+}
+</style>
+</head>
+
+<body>
+<h1>Random Cat Pictures</h1>
+
+<div class="cat-container">
+<div id="loading">Loading cat...</div>
+
+<img
+id="cat-image"
+alt="Random cute cat picture"
+>
+</div>
+
+<button id="new-cat">
+A NEW CAT
+</button>
+
+<script>
+const catImage = document.getElementById("cat-image");
+const loading = document.getElementById("loading");
+const button = document.getElementById("new-cat");
+
+async function getNewCat() {
+
+loading.style.display = "block";
+catImage.style.opacity = "0";
+
+try {
+const response = await fetch(
+"https://api.thecatapi.com/v1/images/search"
+);
+
+const data = await response.json();
+const imageUrl = data[0].url;
+
+catImage.onload = () => {
+loading.style.display = "none";
+catImage.style.opacity = "1";
+};
+
+catImage.src = imageUrl;
+
+} catch (error) {
+loading.textContent = "Couldn't find a cat 😿";
+console.error(error);
+}
+}
+
+button.addEventListener("click", getNewCat);
+
+
+getNewCat();
+</script>
+
+</body>
+</html>
